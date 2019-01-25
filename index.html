@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Rock, Paper, Scissors</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      function computerPlay(){
+        let randomNum = (Math.floor(Math.random() * 3));
+        let computerChoice;
+
+        if(randomNum == 0) {
+          computerChoice = "rock";
+        } else if (randomNum == 1){
+          computerChoice = "paper";
+        } else {
+          computerChoice = "scissors"
+        }
+
+        return computerChoice;
+      }
+
+      function playRound(playerSelection, computerSelection){
+        
+        if(playerSelection.toLowerCase() == "rock"){
+          if(computerSelection.toLowerCase() == "paper"){
+            return "You lose! Paper beats Rock.";
+          } else if (computerSelection.toLowerCase() == "scissors") {
+            return "You win! Rock beats Scissors.";
+          } else {
+            return "It was a tie, play again.";
+          }
+        }
+
+        if(playerSelection.toLowerCase() == "paper"){
+          if(computerSelection.toLowerCase() == "scissors"){
+            return "You lose! Scissors beats Paper.";
+          } else if (computerSelection.toLowerCase() == "rock") {
+            return "You win! Paper beats Rock.";
+          } else {
+            return "It was a tie, play again.";
+          }
+        }
+
+        if(playerSelection.toLowerCase() == "scissors"){
+          if(computerSelection.toLowerCase() == "rock"){
+            return "You lose! Rock beats Scissors.";
+          } else if (computerSelection.toLowerCase() == "paper") {
+            return "You win! Scissors beats Paper.";
+          } else {
+            return "It was a tie, play again.";
+          }
+        }
+      }
+
+      function scissorsChoice(){
+
+      }
+
+      function game(){
+        let userChoice = prompt("Select rock, paper, or scissors.");
+
+        for(let i = 0; i < 5; i++){
+          let userScore;
+          let computerScore;
+
+          playRound(userChoice, computerPlay());
+        }
+
+
+
+      }
+
+      playRound("rock", computerPlay());
+      </script>
+  </body>
+</html>
