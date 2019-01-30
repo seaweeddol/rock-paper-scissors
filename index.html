@@ -6,7 +6,9 @@
   </head>
   <body>
     <script type="text/javascript">
+      // selects random choice for computer
       function computerPlay(){
+        // selects random number between 0 and 2
         let randomNum = (Math.floor(Math.random() * 3));
         let computerChoice;
 
@@ -15,64 +17,82 @@
         } else if (randomNum == 1){
           computerChoice = "paper";
         } else {
-          computerChoice = "scissors"
+          computerChoice = "scissors";
         }
 
         return computerChoice;
       }
 
+      // determines who won the round
       function playRound(playerSelection, computerSelection){
-        
+        // set player choice to lowercase. If player chooses rock, determine outcome based on computer choice
         if(playerSelection.toLowerCase() == "rock"){
           if(computerSelection.toLowerCase() == "paper"){
-            return "You lose! Paper beats Rock.";
+            return "lose";
           } else if (computerSelection.toLowerCase() == "scissors") {
-            return "You win! Rock beats Scissors.";
+            return "win";
           } else {
-            return "It was a tie, play again.";
+            return "tie";
           }
         }
-
+        // set player choice to lowercase. If player chooses paper, determine outcome based on computer choice
         if(playerSelection.toLowerCase() == "paper"){
           if(computerSelection.toLowerCase() == "scissors"){
-            return "You lose! Scissors beats Paper.";
+            return "lose";
           } else if (computerSelection.toLowerCase() == "rock") {
-            return "You win! Paper beats Rock.";
+            return "win";
           } else {
-            return "It was a tie, play again.";
+            return "tie";
           }
         }
-
+        // set player choice to lowercase. If player chooses scissors, determine outcome based on computer choice
         if(playerSelection.toLowerCase() == "scissors"){
           if(computerSelection.toLowerCase() == "rock"){
-            return "You lose! Rock beats Scissors.";
+            return "lose";
           } else if (computerSelection.toLowerCase() == "paper") {
-            return "You win! Scissors beats Paper.";
+            return "win";
           } else {
-            return "It was a tie, play again.";
+            return "tie";
           }
         }
       }
 
-      function scissorsChoice(){
-
-      }
-
+      // run the game
       function game(){
-        let userChoice = prompt("Select rock, paper, or scissors.");
+        let userScore = 0;
+        let computerScore = 0;
+        let gameOutcome;
 
-        for(let i = 0; i < 5; i++){
-          let userScore;
-          let computerScore;
+        // while number of games is less than 6, continue to play rounds
+        for(let i = 1; i < 6; i++){
+          let userChoice = prompt("Select rock, paper, or scissors.");
+          let roundResult = playRound(userChoice, computerPlay());
 
-          playRound(userChoice, computerPlay());
+          // if user won round, add 1 to userScore
+          if (roundResult.includes("win") == true ){
+            userScore++;
+          // if computer won round, add 1 to computerScore
+          } else if (roundResult.includes("lose") == true) {
+            computerScore++;
+          }
+
+          console.log("Game " + i + ". Player score: " + userScore + " Computer score: " + computerScore);
         }
 
+        // determine the game outcome
+        if(userScore > computerScore) {
+          gameOutcome = "You won!";
+        } else if(computerScore > userScore) {
+          gameOutcome = "The computer beat you.";
+        } else {
+          gameOutcome = "It was a tie.";
+        }
 
-
+        console.log(gameOutcome);
+        return gameOutcome;
       }
 
-      playRound("rock", computerPlay());
+      game();
       </script>
   </body>
 </html>
