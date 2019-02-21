@@ -5,8 +5,8 @@ const buttons = document.querySelectorAll('button');
 
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
-    alert(button.id);
-    playRound(button.id, computerPlay());
+    let playerChoice = button.id;
+    console.log(playRound(playerChoice, computerPlay()));
   })
 })
 
@@ -60,39 +60,39 @@ function playRound(playerSelection, computerSelection){
   }
 }
 
-// run the game
-function game(){
-  let userScore = 0;
-  let computerScore = 0;
-  let gameOutcome;
-
-  // while number of games is less than 6, continue to play rounds
-  // for(let i = 1; i < 6; i++){
-  //   let userChoice = prompt("Select rock, paper, or scissors.");
-  //   let roundResult = playRound(userChoice, computerPlay());
-  //
-  //   // if user won round, add 1 to userScore
-  //   if (roundResult.includes("win") == true ){
-  //     userScore++;
-  //   // if computer won round, add 1 to computerScore
-  //   } else if (roundResult.includes("lose") == true) {
-  //     computerScore++;
-  //   }
-  //
-  //   console.log("Game " + i + ". Player score: " + userScore + " Computer score: " + computerScore);
-  // }
-
-  // determine the game outcome
-  if(userScore > computerScore) {
-    gameOutcome = "You won!";
-  } else if(computerScore > userScore) {
-    gameOutcome = "The computer beat you.";
-  } else {
-    gameOutcome = "It was a tie.";
-  }
-
-  console.log(gameOutcome);
-  return gameOutcome;
-}
-
-game();
+// // run the game
+// function game(){
+//   let userScore = 0;
+//   let computerScore = 0;
+//   let gameOutcome;
+//
+//   // while number of games is less than 6, continue to play rounds
+//   // for(let i = 1; i < 6; i++){
+//   //   let userChoice = prompt("Select rock, paper, or scissors.");
+//   //   let roundResult = playRound(userChoice, computerPlay());
+//   //
+//   //   // if user won round, add 1 to userScore
+//   //   if (roundResult.includes("win") == true ){
+//   //     userScore++;
+//   //   // if computer won round, add 1 to computerScore
+//   //   } else if (roundResult.includes("lose") == true) {
+//   //     computerScore++;
+//   //   }
+//   //
+//   //   console.log("Game " + i + ". Player score: " + userScore + " Computer score: " + computerScore);
+//   // }
+//
+//   // determine the game outcome
+//   if(userScore > computerScore) {
+//     gameOutcome = "You won!";
+//   } else if(computerScore > userScore) {
+//     gameOutcome = "The computer beat you.";
+//   } else {
+//     gameOutcome = "It was a tie.";
+//   }
+//
+//   console.log(gameOutcome);
+//   return gameOutcome;
+// }
+//
+// game();
