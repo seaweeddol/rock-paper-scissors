@@ -6,7 +6,7 @@ const roundDisplay = document.querySelector('#roundDisplay')
 const gameResultDisplay = document.querySelector('#gameResult')
 const resetButton = document.querySelector('#reset');
 let playerChoice = '';
-let roundNum = 1;
+let roundNum = 0;
 let playerScore = 0;
 let computerScore = 0;
 let roundOutcome;
@@ -27,12 +27,16 @@ resetButton.addEventListener('click', (e) => {
 
 function reset(){
   playerChoice = '';
-  roundNum = 1;
+  roundNum = 0;
   playerScore = 0;
   computerScore = 0;
+  gameResultDisplay.textContent = '';
   playerScoreDisplay.textContent = playerScore;
   computerScoreDisplay.textContent = computerScore;
   roundDisplay.textContent = roundNum;
+  playerOptions.forEach((button) => {
+    button.disabled = false;
+  })
 }
 
 // selects random choice for computer
@@ -100,7 +104,10 @@ function gameResult(){
 
 // run the game
 function game(){
-  if (roundNum < 6) {
+  ++roundNum;
+  if (roundNum < 5) {
+    roundDisplay.textContent = roundNum;
+
     if (roundOutcome == "win") {
       playerScore++;
       playerScoreDisplay.textContent = playerScore;
@@ -108,9 +115,11 @@ function game(){
       computerScore++;
       computerScoreDisplay.textContent = computerScore;
     }
-    roundDisplay.textContent = roundNum++;
   } else {
+    roundDisplay.textContent = roundNum;
     gameResult();
-    reset();
+    playerOptions.forEach((button) => {
+      button.disabled = true;
+    })
   }
 }
