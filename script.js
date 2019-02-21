@@ -1,9 +1,10 @@
-const playerOptions = document.querySelectorAll('button');
+const playerOptions = document.querySelectorAll('.optionButton');
 const playerScoreDisplay = document.querySelector('#playerScore');
 const computerScoreDisplay = document.querySelector('#computerScore');
 const roundOutcomeDisplay = document.querySelector('#roundOutcome')
 const roundDisplay = document.querySelector('#roundDisplay')
 const gameResultDisplay = document.querySelector('#gameResult')
+const resetButton = document.querySelector('#reset');
 let playerChoice = '';
 let roundNum = 1;
 let playerScore = 0;
@@ -11,7 +12,18 @@ let computerScore = 0;
 let roundOutcome;
 
 reset();
-playerSelection();
+
+playerOptions.forEach((button) => {
+  button.addEventListener('click', (e) => {
+    playerChoice = button.id;
+    roundOutcomeDisplay.textContent = playRound(playerChoice, computerPlay());
+    game();
+  })
+})
+
+resetButton.addEventListener('click', (e) => {
+  reset();
+})
 
 function reset(){
   playerChoice = '';
@@ -21,18 +33,6 @@ function reset(){
   playerScoreDisplay.textContent = playerScore;
   computerScoreDisplay.textContent = computerScore;
   roundDisplay.textContent = roundNum;
-}
-
-function playerSelection(){
-  playerOptions.forEach((button) => {
-    button.addEventListener('click', (e) => {
-      playerChoice = button.id;
-      roundOutcomeDisplay.textContent = playRound(playerChoice, computerPlay());
-
-      game();
-      // return playRound(playerChoice, computerPlay());
-    })
-  })
 }
 
 // selects random choice for computer
