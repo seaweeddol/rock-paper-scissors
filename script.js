@@ -6,7 +6,7 @@ const roundDisplay = document.querySelector('#roundDisplay')
 const gameResultDisplay = document.querySelector('#gameResult')
 let playerChoice = '';
 let roundNum = 1;
-let userScore = 0;
+let playerScore = 0;
 let computerScore = 0;
 let roundOutcome;
 
@@ -16,8 +16,9 @@ playerSelection();
 function reset(){
   playerChoice = '';
   roundNum = 1;
-  userScore, computerScore = 0;
-  playerScoreDisplay.textContent = userScore;
+  playerScore = 0;
+  computerScore = 0;
+  playerScoreDisplay.textContent = playerScore;
   computerScoreDisplay.textContent = computerScore;
   roundDisplay.textContent = roundNum;
 }
@@ -86,9 +87,9 @@ function playRound(playerSelection, computerSelection){
 
 // determine the game outcome
 function gameResult(){
-  if(userScore > computerScore) {
+  if(playerScore > computerScore) {
     gameOutcome = "You won!";
-  } else if(computerScore > userScore) {
+  } else if(computerScore > playerScore) {
     gameOutcome = "The computer beat you.";
   } else {
     gameOutcome = "It was a tie.";
@@ -101,8 +102,8 @@ function gameResult(){
 function game(){
   if (roundNum < 6) {
     if (roundOutcome == "win") {
-      userScore++;
-      playerScoreDisplay.textContent = userScore;
+      playerScore++;
+      playerScoreDisplay.textContent = playerScore;
     } else if (roundOutcome == "lose") {
       computerScore++;
       computerScoreDisplay.textContent = computerScore;
