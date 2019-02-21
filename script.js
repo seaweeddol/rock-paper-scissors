@@ -1,12 +1,13 @@
-const buttons = document.querySelectorAll('button');
+const playerOptions = document.querySelectorAll('button');
+const gameResult = document.querySelector('#gameResult');
 // const rockBtn = document.querySelector('#rock');
 // const paperBtn = document.querySelector('#paper');
 // const scissorsBtn = document.querySelector('#scissors');
 
-buttons.forEach((button) => {
+playerOptions.forEach((button) => {
   button.addEventListener('click', (e) => {
     let playerChoice = button.id;
-    console.log(playRound(playerChoice, computerPlay()));
+    gameResult.textContent = playRound(playerChoice, computerPlay());
   })
 })
 
