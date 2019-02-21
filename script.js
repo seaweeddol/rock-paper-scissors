@@ -1,15 +1,38 @@
 const playerOptions = document.querySelectorAll('button');
-const gameResult = document.querySelector('#gameResult');
-// const rockBtn = document.querySelector('#rock');
-// const paperBtn = document.querySelector('#paper');
-// const scissorsBtn = document.querySelector('#scissors');
+const playerScoreDisplay = document.querySelector('#playerScore');
+const computerScoreDisplay = document.querySelector('#computerScore');
+const roundOutcomeDisplay = document.querySelector('#roundOutcome')
+const roundDisplay = document.querySelector('#roundDisplay')
+const gameResultDisplay = document.querySelector('#gameResult')
+let playerChoice = '';
+let roundNum = 1;
+let userScore = 0;
+let computerScore = 0;
+let roundOutcome;
 
-playerOptions.forEach((button) => {
-  button.addEventListener('click', (e) => {
-    let playerChoice = button.id;
-    gameResult.textContent = playRound(playerChoice, computerPlay());
+reset();
+playerSelection();
+
+function reset(){
+  playerChoice = '';
+  roundNum = 1;
+  userScore, computerScore = 0;
+  playerScoreDisplay.textContent = userScore;
+  computerScoreDisplay.textContent = computerScore;
+  roundDisplay.textContent = roundNum;
+}
+
+function playerSelection(){
+  playerOptions.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      playerChoice = button.id;
+      roundOutcomeDisplay.textContent = playRound(playerChoice, computerPlay());
+
+      game();
+      // return playRound(playerChoice, computerPlay());
+    })
   })
-})
+}
 
 // selects random choice for computer
 function computerPlay(){
@@ -30,70 +53,63 @@ function computerPlay(){
 
 // determines who won the round
 function playRound(playerSelection, computerSelection){
-  if(playerSelection.toLowerCase() == "rock"){
-    if(computerSelection.toLowerCase() == "paper"){
-      return "lose";
-    } else if (computerSelection.toLowerCase() == "scissors") {
-      return "win";
+  if(playerSelection == "rock"){
+    if(computerSelection == "paper"){
+      roundOutcome = "lose";
+    } else if (computerSelection == "scissors") {
+      roundOutcome = "win";
     } else {
-      return "tie";
+      roundOutcome = "tie";
     }
   }
-  // set player choice to lowercase. If player chooses paper, determine outcome based on computer choice
-  if(playerSelection.toLowerCase() == "paper"){
-    if(computerSelection.toLowerCase() == "scissors"){
-      return "lose";
-    } else if (computerSelection.toLowerCase() == "rock") {
-      return "win";
+  // If player chooses paper, determine outcome based on computer choice
+  if(playerSelection == "paper"){
+    if(computerSelection == "scissors"){
+      roundOutcome = "lose";
+    } else if (computerSelection == "rock") {
+      roundOutcome = "win";
     } else {
-      return "tie";
+      roundOutcome = "tie";
     }
   }
-  // set player choice to lowercase. If player chooses scissors, determine outcome based on computer choice
-  if(playerSelection.toLowerCase() == "scissors"){
-    if(computerSelection.toLowerCase() == "rock"){
-      return "lose";
-    } else if (computerSelection.toLowerCase() == "paper") {
-      return "win";
+  // If player chooses scissors, determine outcome based on computer choice
+  if(playerSelection == "scissors"){
+    if(computerSelection == "rock"){
+      roundOutcome =  "lose";
+    } else if (computerSelection == "paper") {
+      roundOutcome = "win";
     } else {
-      return "tie";
+      roundOutcome = "tie";
     }
   }
 }
 
-// // run the game
-// function game(){
-//   let userScore = 0;
-//   let computerScore = 0;
-//   let gameOutcome;
-//
-//   // while number of games is less than 6, continue to play rounds
-//   // for(let i = 1; i < 6; i++){
-//   //   let userChoice = prompt("Select rock, paper, or scissors.");
-//   //   let roundResult = playRound(userChoice, computerPlay());
-//   //
-//   //   // if user won round, add 1 to userScore
-//   //   if (roundResult.includes("win") == true ){
-//   //     userScore++;
-//   //   // if computer won round, add 1 to computerScore
-//   //   } else if (roundResult.includes("lose") == true) {
-//   //     computerScore++;
-//   //   }
-//   //
-//   //   console.log("Game " + i + ". Player score: " + userScore + " Computer score: " + computerScore);
-//   // }
-//
-//   // determine the game outcome
-//   if(userScore > computerScore) {
-//     gameOutcome = "You won!";
-//   } else if(computerScore > userScore) {
-//     gameOutcome = "The computer beat you.";
-//   } else {
-//     gameOutcome = "It was a tie.";
-//   }
-//
-//   console.log(gameOutcome);
-//   return gameOutcome;
-// }
-//
-// game();
+// determine the game outcome
+function gameResult(){
+  if(userScore > computerScore) {
+    gameOutcome = "You won!";
+  } else if(computerScore > userScore) {
+    gameOutcome = "The computer beat you.";
+  } else {
+    gameOutcome = "It was a tie.";
+  }
+
+  gameResultDisplay.textContent = gameOutcome;
+}
+
+// run the game
+function game(){
+  if (roundNum < 6) {
+    if (roundOutcome == "win") {
+      userScore++;
+      playerScoreDisplay.textContent = userScore;
+    } else if (roundOutcome == "lose") {
+      computerScore++;
+      computerScoreDisplay.textContent = computerScore;
+    }
+    roundDisplay.textContent = roundNum++;
+  } else {
+    gameResult();
+    reset();
+  }
+}
