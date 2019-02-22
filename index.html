@@ -3,23 +3,27 @@
   <head>
     <meta charset="utf-8">
     <title>Rock, Paper, Scissors</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div class="playerOptions">
-      <button type="button" name="button" id="rock" class="optionButton">Rock</button>
-      <button type="button" name="button" id="paper" class="optionButton">Paper</button>
-      <button type="button" name="button" id="scissors" class="optionButton">Scissors</button>
-    </div>
+    <div id="gameContainer">
+      <div>
+        <p id="roundNumber"><strong>Round: </strong><span id="roundDisplay"></span></p>
+        <div id="roundOutcome"></div>
+        <p><strong>Player Score: </strong><span id="playerScore"></span></p>
+        <p><strong>Computer Score: </strong><span id="computerScore"></span></p>
+        <div id="gameResult"></div>
+      </div>
 
-    <div>
-      <p><strong>Round: </strong><span id="roundDisplay"></span></p>
-      <div id="roundOutcome"></div>
-      <p><strong>Player Score: </strong><span id="playerScore"></span></p>
-      <p><strong>Computer Score: </strong><span id="computerScore"></span></p>
-      <div id="gameResult"></div>
-    </div>
+      <div class="playerOptions">
+        <button type="button" name="button" id="rock" class="optionButton"><i class="far fa-hand-rock"></i></button>
+        <button type="button" name="button" id="paper" class="optionButton"><i class="far fa-hand-paper"></i></button>
+        <button type="button" name="button" id="scissors" class="optionButton"><i class="far fa-hand-scissors"></i></button>
+      </div>
 
-    <button type="button" name="button" id="reset">Reset</button>
+      <button type="button" name="button" id="reset">Reset</button>
+    </div>
 
     <script src="script.js" charset="utf-8"></script>
   </body>

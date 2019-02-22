@@ -2,7 +2,7 @@ const playerOptions = document.querySelectorAll('.optionButton');
 const playerScoreDisplay = document.querySelector('#playerScore');
 const computerScoreDisplay = document.querySelector('#computerScore');
 const roundOutcomeDisplay = document.querySelector('#roundOutcome')
-const roundDisplay = document.querySelector('#roundDisplay')
+const roundNumberDisplay = document.querySelector('#roundDisplay')
 const gameResultDisplay = document.querySelector('#gameResult')
 const resetButton = document.querySelector('#reset');
 let playerChoice = '';
@@ -11,16 +11,19 @@ let playerScore = 0;
 let computerScore = 0;
 let roundOutcome;
 
+// initialize game with reset
 reset();
 
+// event listener for player option buttons
 playerOptions.forEach((button) => {
   button.addEventListener('click', (e) => {
     playerChoice = button.id;
-    roundOutcomeDisplay.textContent = playRound(playerChoice, computerPlay());
+    playRound(playerChoice, computerPlay());
     updateScore();
   })
 })
 
+// event listener for reset button
 resetButton.addEventListener('click', (e) => {
   reset();
 })
@@ -31,10 +34,11 @@ function reset(){
   roundNum = 0;
   playerScore = 0;
   computerScore = 0;
+  roundOutcomeDisplay.textContent = '';
   gameResultDisplay.textContent = '';
   playerScoreDisplay.textContent = playerScore;
   computerScoreDisplay.textContent = computerScore;
-  roundDisplay.textContent = roundNum;
+  roundNumberDisplay.textContent = roundNum;
   playerOptions.forEach((button) => {
     button.disabled = false;
   })
@@ -60,39 +64,41 @@ function computerPlay(){
 function playRound(playerSelection, computerSelection){
   if(playerSelection == "rock"){
     if(computerSelection == "paper"){
-      roundOutcome = "lose";
+      roundOutcome = "Paper beats rock. You lost this round.";
     } else if (computerSelection == "scissors") {
-      roundOutcome = "win";
+      roundOutcome = "Rock beats Scissors. You won this round!";
     } else {
-      roundOutcome = "tie";
+      roundOutcome = "This round was a tie.";
     }
   }
-  // If player chooses paper, determine outcome based on computer choice
+
   if(playerSelection == "paper"){
     if(computerSelection == "scissors"){
-      roundOutcome = "lose";
+      roundOutcome = "Scissors beats Paper. You lost this round.";
     } else if (computerSelection == "rock") {
-      roundOutcome = "win";
+      roundOutcome = "Paper beats Rock. You won this round!";
     } else {
-      roundOutcome = "tie";
+      roundOutcome = "This round was a tie.";
     }
   }
-  // If player chooses scissors, determine outcome based on computer choice
+
   if(playerSelection == "scissors"){
     if(computerSelection == "rock"){
-      roundOutcome =  "lose";
+      roundOutcome =  "Rock beats Scissors. You lost this round.";
     } else if (computerSelection == "paper") {
-      roundOutcome = "win";
+      roundOutcome = "Scissors beats Paper. You won this round!";
     } else {
-      roundOutcome = "tie";
+      roundOutcome = "This round was a tie.";
     }
   }
+
+  roundOutcomeDisplay.textContent = roundOutcome;
 }
 
 // determine the game outcome
 function gameResult(){
   if(playerScore > computerScore) {
-    gameOutcome = "You won!";
+    gameOutcome = "You won the game!";
   } else if(computerScore > playerScore) {
     gameOutcome = "The computer beat you.";
   } else {
@@ -104,19 +110,20 @@ function gameResult(){
 
 // update score
 function updateScore(){
-  ++roundNum;
-  if (roundNum < 5) {
-    roundDisplay.textContent = roundNum;
+  ++roundNum; // add to round counter each time updateScore() function is called
 
-    if (roundOutcome == "win") {
+  if (roundNum < 5) { // if number of rounds is less than 5, update score based on who won the round
+    roundNumberDisplay.textContent = roundNum;
+
+    if (roundOutcome.includes("won") == true) {
       playerScore++;
       playerScoreDisplay.textContent = playerScore;
-    } else if (roundOutcome == "lose") {
+    } else if (roundOutcome.includes("lost") == true) {
       computerScore++;
       computerScoreDisplay.textContent = computerScore;
     }
-  } else {
-    roundDisplay.textContent = roundNum;
+  } else { // else, determine winner and disable player option buttons
+    roundNumberDisplay.textContent = roundNum;
     gameResult();
     playerOptions.forEach((button) => {
       button.disabled = true;
