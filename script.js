@@ -115,22 +115,26 @@ function gameResult(){
   gameResultDisplay.textContent = gameOutcome;
 }
 
+function roundResult(){
+  roundNumberDisplay.textContent = roundNum;
+
+  if (roundOutcome.includes("won") == true) {
+    playerScore++;
+    playerScoreDisplay.textContent = playerScore;
+  } else if (roundOutcome.includes("lost") == true) {
+    computerScore++;
+    computerScoreDisplay.textContent = computerScore;
+  }
+}
+
 // update score
 function updateScore(){
   ++roundNum; // add to round counter each time updateScore() function is called
 
   if (roundNum < 5) { // if number of rounds is less than 5, update score based on who won the round
-    roundNumberDisplay.textContent = roundNum;
-
-    if (roundOutcome.includes("won") == true) {
-      playerScore++;
-      playerScoreDisplay.textContent = playerScore;
-    } else if (roundOutcome.includes("lost") == true) {
-      computerScore++;
-      computerScoreDisplay.textContent = computerScore;
-    }
+    roundResult();
   } else { // else, determine winner and disable player option buttons
-    roundNumberDisplay.textContent = roundNum;
+    roundResult();
     gameResult();
     playerOptions.forEach((button) => {
       button.disabled = true;
