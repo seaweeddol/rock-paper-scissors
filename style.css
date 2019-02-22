@@ -1,0 +1,12 @@
+#gameContainer {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.optionButton {
+  padding: 20px;
+}
+
+.far {
+  font-size: 3em;
+}
