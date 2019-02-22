@@ -17,7 +17,7 @@ playerOptions.forEach((button) => {
   button.addEventListener('click', (e) => {
     playerChoice = button.id;
     roundOutcomeDisplay.textContent = playRound(playerChoice, computerPlay());
-    game();
+    updateScore();
   })
 })
 
@@ -25,6 +25,7 @@ resetButton.addEventListener('click', (e) => {
   reset();
 })
 
+// reset all variables and text
 function reset(){
   playerChoice = '';
   roundNum = 0;
@@ -41,7 +42,6 @@ function reset(){
 
 // selects random choice for computer
 function computerPlay(){
-  // selects random number between 0 and 2
   let randomNum = (Math.floor(Math.random() * 3));
   let computerChoice;
 
@@ -102,8 +102,8 @@ function gameResult(){
   gameResultDisplay.textContent = gameOutcome;
 }
 
-// run the game
-function game(){
+// update score
+function updateScore(){
   ++roundNum;
   if (roundNum < 5) {
     roundDisplay.textContent = roundNum;
