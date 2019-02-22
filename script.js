@@ -1,3 +1,4 @@
+const body = document.querySelector('body');
 const playerOptions = document.querySelectorAll('.optionButton');
 const playerScoreDisplay = document.querySelector('#playerScore');
 const computerScoreDisplay = document.querySelector('#computerScore');
@@ -34,14 +35,18 @@ function reset(){
   roundNum = 0;
   playerScore = 0;
   computerScore = 0;
-  roundOutcomeDisplay.textContent = '';
-  gameResultDisplay.textContent = '';
+  roundOutcomeDisplay.textContent = 'Make a decision.';
+  gameResultDisplay.textContent = 'ROCK, PAPER, SCISSORS';
   playerScoreDisplay.textContent = playerScore;
   computerScoreDisplay.textContent = computerScore;
   roundNumberDisplay.textContent = roundNum;
+
+  // re-enable buttons
   playerOptions.forEach((button) => {
     button.disabled = false;
   })
+
+  body.className = '';
 }
 
 // selects random choice for computer
@@ -99,8 +104,10 @@ function playRound(playerSelection, computerSelection){
 function gameResult(){
   if(playerScore > computerScore) {
     gameOutcome = "You won the game!";
+    body.className += "winner";
   } else if(computerScore > playerScore) {
     gameOutcome = "The computer beat you.";
+    body.className += "loser";
   } else {
     gameOutcome = "It was a tie.";
   }
